@@ -1,4 +1,4 @@
 import  mnist
 mndata = mnist.MNIST('./images')
-images, labels = mndata.load_training()
-print(images, labels)
+train_images, train_labels = mndata.load_training()
+test_images, test_labels = mndata.load_testing()
