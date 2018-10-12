@@ -2,9 +2,10 @@ import numpy as np
 
 
 def image_value(image):
-    value = 0
+    value = 1
     for i in range(len(image)):
-        value += i*image[i]
+        if image[i]:
+            value += 1
     return value
 
 

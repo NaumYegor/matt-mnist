@@ -1,5 +1,4 @@
 import funcs
-import numpy as np
 
 
 def test(test_images, test_labels,
@@ -12,6 +11,4 @@ def test(test_images, test_labels,
         prediction = funcs.knn(k, results, closest_index)
         if real_label == prediction:
             success += 1
-        print(real_label, prediction, closest_index)
-    print(results)
     return 100*success/len(test_images)
