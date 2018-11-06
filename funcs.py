@@ -2,7 +2,7 @@ import numpy as np
 
 
 def image_value(image):
-    value = 1
+    value = 0
     for i in range(len(image)):
         if image[i]:
             value += 1

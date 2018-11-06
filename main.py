@@ -1,18 +1,25 @@
 import mnist
-import test
-import train
 import time
+import sklearn.neighbors
 
-K = 997
 mndata = mnist.MNIST('./images')
 train_images, train_labels = mndata.load_training()
 test_images, test_labels = mndata.load_testing()
-results = []
-start_time = time.time()
-results = train.train(train_images, train_labels, results)
-results = sorted(results, key=lambda image: image[0])  # Sorts by value
+result = sklearn.neighbors.KNeighborsClassifier(n_neighbors=3)
 
-print("Accuracy: " + str(test.test(test_images, test_labels, results, K)))
-print("Time: " + str(time.time()-start_time))
+fit_time = time.time()
+result.fit(train_images, train_labels)
+print("Fit time: " + str(time.time()-fit_time))
 
+predict_time = time.time()
+accuracy = 0
+test_set_length = len(test_images)
 
+for i in range(test_set_length):
+    if result.predict([test_images[i]])[0] == test_labels[i]:
+        accuracy += 1
+accuracy /= test_set_length
+accuracy = str(accuracy*100) + '%'
+
+print("Prediction time: " + str(time.time()-predict_time))
+print("Prediction accuracy: " + accuracy)
